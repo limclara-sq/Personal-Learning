@@ -5,7 +5,7 @@
 <head><meta charset="utf-8" />
 
 
-<title>data-Structures</title>
+<title>Data-Structures</title>
 
 <style type="text/css">
     /*!
@@ -13155,6 +13155,12 @@ div#notebook {
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Algorithms-and-Data-Structures-in-Python-(Udemy)">Algorithms and Data Structures in Python (Udemy)<a class="anchor-link" href="#Algorithms-and-Data-Structures-in-Python-(Udemy)">&#182;</a></h1>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="1)-Introduction">1) Introduction<a class="anchor-link" href="#1)-Introduction">&#182;</a></h2>
 </div>
 </div>
@@ -13542,7 +13548,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><img src="images/linkedlists_node.png"></p>
+<p><img src="Algorithms_DataStructures/images/linkedlists_node.png"></p>
 
 </div>
 </div>
@@ -13642,7 +13648,83 @@ div#notebook {
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span> 
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># first, create distinct class for Nodes in LinkedList</span>
+<span class="k">class</span> <span class="nc">Node</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span> <span class="c1"># every node has a data and reference to next node</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">nextNode</span> <span class="o">=</span> <span class="kc">None</span><span class="p">;</span>
+        
+<span class="k">class</span> <span class="nc">LinkedList</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">head</span><span class="o">=</span><span class="kc">None</span><span class="p">;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">size</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+        
+    <span class="c1"># inserting node at the start of the LinkedList</span>
+    <span class="k">def</span> <span class="nf">insertStart</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">data</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">size</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">size</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
+        <span class="n">newNode</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span><span class="n">Data</span><span class="p">)</span> <span class="c1"># instantiate new node with data</span>
+        
+        <span class="c1"># if it&#39;s the first node, then set the head to be equal to the new node</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">head</span><span class="p">:</span> <span class="c1"># this node is the null node, so it&#39;s first item in the linked list</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">head</span><span class="o">=</span><span class="n">newNode</span><span class="p">;</span> <span class="c1"># first node (root node)</span>
+        <span class="k">else</span><span class="p">:</span> <span class="c1"># otherwise, if the new node is not the first node </span>
+            <span class="n">newNode</span><span class="o">.</span><span class="n">nextNode</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">head</span><span class="p">;</span> <span class="c1"># new node which is inserted has to point to the existing head of the linked list</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">head</span><span class="o">=</span><span class="n">newNode</span><span class="p">;</span> <span class="c1"># and the inserted node becomes the head</span>
+            
+    <span class="k">def</span> <span class="nf">size</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">size</span><span class="p">;</span> 
+    
+    <span class="c1"># this is an example of what you should not do, as it takes O(N) time</span>
+    <span class="k">def</span> <span class="nf">size_alternate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">actualNode</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">head</span><span class="p">;</span>
+        <span class="n">size</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+        
+        <span class="k">while</span> <span class="n">actualNode</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span> <span class="c1"># not the head node</span>
+            <span class="n">size</span><span class="o">+=</span><span class="mi">1</span><span class="p">;</span>
+            <span class="n">actualNode</span><span class="o">=</span><span class="n">actualNode</span><span class="o">.</span><span class="n">nextNode</span><span class="p">;</span>
+        
+        <span class="k">return</span> <span class="n">size</span><span class="p">;</span> 
+    
+    <span class="c1"># O(N) time complexity</span>
+    <span class="c1"># inserting node at the end of the LinkedList</span>
+    <span class="k">def</span> <span class="nf">insertEnd</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">data</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">size</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">size</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
+        <span class="n">newNode</span><span class="o">=</span> <span class="n">Node</span><span class="p">(</span><span class="n">data</span><span class="p">);</span>
+        <span class="n">actualNode</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">head</span><span class="p">;</span>
+
+        <span class="c1"># goal: the new node inserted should point to the Null</span>
+        <span class="k">while</span> <span class="n">actualNode</span><span class="o">.</span><span class="n">nextNode</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span> <span class="c1"># if the next node of the head node is not null (i.e. there are other nodes to traverse)</span>
+            <span class="n">newNode</span><span class="o">=</span><span class="n">newNode</span><span class="o">.</span><span class="n">nextNode</span><span class="p">;</span> 
+        <span class="c1"># when you break out of this while loop, it means that the next node that the actual node is pointing to is a null node</span>
+        <span class="n">actualNode</span><span class="o">.</span><span class="n">nextNode</span><span class="o">=</span><span class="n">newNode</span><span class="p">;</span>
+        
+    <span class="k">def</span> <span class="nf">tranverseList</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">actualNode</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">head</span><span class="p">;</span>
+        
+        <span class="k">while</span> <span class="n">actualNode</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span> <span class="c1"># as long as the current node is not null, you should move on to the next node in the list</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%d</span><span class="s2"> &quot;</span> <span class="o">%</span> <span class="n">actualNode</span><span class="o">.</span><span class="n">data</span><span class="p">);</span> <span class="c1"># print value of current node</span>
+            <span class="n">actualNode</span><span class="o">=</span><span class="n">actualNode</span><span class="o">.</span><span class="n">nextNode</span><span class="p">;</span>
+            
+    <span class="c1"># removing a node</span>
+    <span class="k">def</span> <span class="nf">remove</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">data</span><span class="p">):</span>
+        
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">head</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span> <span class="c1"># the linkedlist is empty</span>
+            <span class="k">return</span><span class="p">;</span> 
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">size</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">size</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+        
+        <span class="n">currentNode</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">head</span><span class="p">;</span>
+        <span class="n">previousNode</span><span class="o">=</span><span class="kc">None</span><span class="p">;</span>
+        
+        <span class="k">while</span> <span class="n">currentNode</span> <span class="o">!=</span> <span class="n">data</span><span class="p">:</span>
+            <span class="n">previousNode</span><span class="o">=</span><span class="n">currentNode</span><span class="p">;</span>
+            <span class="n">currentNode</span><span class="o">=</span><span class="n">currentNode</span><span class="o">.</span><span class="n">nextNode</span><span class="p">;</span> <span class="c1"># essentially moving on to the next item on the list</span>
+            
+        <span class="c1"># once you break out of this loop, it means that you&#39;re at the nde which has the data which is to be removed</span>
+        <span class="k">if</span> <span class="n">previousNode</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span> <span class="c1"># you&#39;re at the head node which is to be deleted</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">head</span> <span class="o">=</span> <span class="n">currentNode</span><span class="o">.</span><span class="n">nextNode</span><span class="p">;</span> <span class="c1"># update reference for head node</span>
+        <span class="k">else</span><span class="p">:</span> <span class="c1"># any other node to be deleted apart from the head node</span>
+            <span class="n">previousNode</span><span class="o">.</span><span class="n">nextNode</span><span class="o">=</span><span class="n">currentNode</span><span class="o">.</span><span class="n">nextNode</span><span class="p">;</span> <span class="c1"># previous node points to the next node of the current node (which you are deleting)</span>
 </pre></div>
 
     </div>
@@ -13650,6 +13732,19 @@ div#notebook {
 </div>
 
   </div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Important notes:</p>
+<ul>
+<li>Note that you are accessing the root node of the 'tree' (the linked list)</li>
+<li>Not able to access middle node or last node directly, access other nodes with the <code>nextNode</code> reference from the <code>self.head</code></li>
+<li>To obtain the size of the LinkedList, we can store a reference to the size (<code>self.size</code>) and everytime we have an insertion, you have an increment of the size by 1. This is the efficient method with O(1) time - as opposed to searching through the list which will occur with O(N) time complexity.</li>
+</ul>
+<p>Intuition for inserting item into the end of the LinkedList: recall that we start at the head/root node, and we have to iterate through all the items until we bump into a null/node. If an existing node points to a null/none, it means that it is the last node.</p>
+
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="2.3-Comparison-of-Arrays-and-Linked-Lists">2.3 Comparison of Arrays and Linked Lists<a class="anchor-link" href="#2.3-Comparison-of-Arrays-and-Linked-Lists">&#182;</a></h3>
@@ -13731,7 +13826,7 @@ div#notebook {
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span> 
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">STOPPED</span> <span class="n">AT</span> <span class="n">SECTION</span> <span class="mi">4</span> <span class="n">PART</span> <span class="mi">15</span>
 </pre></div>
 
     </div>

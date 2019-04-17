@@ -3,4 +3,4 @@
 A repo to store my notes:
 - [Data Structures][]
 
-[Data Structures]: /Data-Structures.html
+[Data Structures]: /data-Structures.html
